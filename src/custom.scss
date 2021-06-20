@@ -1,0 +1,22 @@
+// custom scss
+/* customizando a paleta de cores */
+$primary: #c91331;
+$secondary: #181818;
+$light: #f4f4f4;
+$dark: #8a8a8a;
+$white: rgb(255, 255, 255);
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "light": $light,
+  "dark": $dark,
+);
+//nav
+$navbar-dark-color: $white;
+$navbar-dark-hover-color: $primary;
+
+// customizando a fonte
+$font-family-sans-serif: "Noto Sans";
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";

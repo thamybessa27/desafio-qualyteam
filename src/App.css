@@ -1,38 +1,21 @@
-.App {
-  text-align: center;
+/* Estilos gerais do app */
+.app {
+  display: grid;
+  grid-template-areas:
+    "menu"
+    "conteudo"
+    "rodape";
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.menu {
+  grid-area: menu;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.conteudo {
+  grid-area: conteudo;
+  max-width: 80vw;
+  margin: 10px auto;
+  min-height: calc(100vh - 96px);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.rodape {
+  grid-area: rodape;
+  height: 40px;
 }
