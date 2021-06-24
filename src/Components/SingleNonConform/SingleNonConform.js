@@ -4,6 +4,7 @@ import useFetch from "use-http";
 import { correctActionsURL } from "../../Service/service";
 import { useLocation } from "react-router-dom";
 import NonConformCard from "../NonConformBody/NonConformCard";
+import CustomAccordion from "../CustomAccordion/CustomAccordion";
 
 const SingleNonConform = () => {
   const location = useLocation();
@@ -24,7 +25,9 @@ const SingleNonConform = () => {
         occurenceDate={nonConform.date}
         description={nonConform.description}
         departments={nonConform.departments}
-      ></NonConformCard>
+      >
+        <CustomAccordion actions={actions} />
+      </NonConformCard>
     </section>
   );
 };

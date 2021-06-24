@@ -22,3 +22,6 @@ export const getDeptsName = (deptsArray, nonConformArray) =>
     .filter((item) => nonConformArray.includes(item.id))
     .map((el) => el.name)
     .join(", ");
+
+export const getCorrectActions = (actionsArray, nonConformArray) =>
+  actionsArray.filter((item) => nonConformArray.includes(item.id));
