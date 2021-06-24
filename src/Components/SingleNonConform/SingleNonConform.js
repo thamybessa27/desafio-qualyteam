@@ -1,25 +1,30 @@
 import React from "react";
 import Spinner from "react-bootstrap/Spinner";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import useFetch from "use-http";
 import { correctActionsURL } from "../../Service/service";
+import { useLocation } from "react-router-dom";
+import NonConformCard from "../NonConformBody/NonConformCard";
 
 const SingleNonConform = () => {
+  const location = useLocation();
+  const { nonConform } = location.state;
   //fetching the corrective actions
-  const { data = [], loading, error } = useFetch(correctActionsURL, []);
+  const {
+    data: actions = [],
+    loading: loadingAction,
+    error: errActions,
+  } = useFetch(correctActionsURL, []);
+
   return (
     <section className="conteudo">
-      {loading && <Spinner animation="border" />}
-      {error && "Error!"}
-      <Card border="light" style={{ boxShadow: "7px 7px 5px #f4f4f4" }}>
-        <Card.Body>
-          <Card.Title>Data da ocorrência:</Card.Title>
-          <Card.Text>Descrição: </Card.Text>
-          <Card.Text>Departamentos:</Card.Text>
-          <Button variant="primary">Ver mais</Button>
-        </Card.Body>
-      </Card>
+      {loadingAction && <Spinner animation="border" />}
+      {errActions && "Error!"}
+      <NonConformCard
+        key={nonConform.id}
+        occurenceDate={nonConform.date}
+        description={nonConform.description}
+        departments={nonConform.departments}
+      ></NonConformCard>
     </section>
   );
 };

@@ -1,8 +1,9 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import CustomLink from "./CustomLink";
 
 const Menu = () => {
   return (
@@ -15,12 +16,17 @@ const Menu = () => {
           className="justify-content-end"
         >
           <Nav className="justify-content-end">
-            <Nav.Link>
-              <FontAwesomeIcon icon={faHome} /> Início
-            </Nav.Link>
-            <Nav.Link>
-              <FontAwesomeIcon icon={faPlus} /> Nova Não-Conformidade
-            </Nav.Link>
+            <Link to="/" component={CustomLink} icon={faHome} path="/">
+              Início
+            </Link>
+            <Link
+              to="/nova-nao-conformidade"
+              component={CustomLink}
+              icon={faPlus}
+              path="/nova-nao-conformidade"
+            >
+              Nova não-conformidade
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

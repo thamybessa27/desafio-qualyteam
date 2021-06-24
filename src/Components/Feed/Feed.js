@@ -5,10 +5,10 @@ import {
   naoConformsURL,
 } from "../../Service/service";
 import Spinner from "react-bootstrap/Spinner";
-import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import useFetch from "use-http";
 import NonConformCard from "../NonConformBody/NonConformCard";
+import { Link } from "react-router-dom";
 
 const Feed = () => {
   //fetching the non-conformities
@@ -24,15 +24,31 @@ const Feed = () => {
     <main className="conteudo">
       {(loading || loadingDpt) && <Spinner animation="border" />}
       {(error || errDpt) && "Error!"}
-      {data.map((el, index) => {
+      {data.map((el) => {
+        const departmentsStr = getDeptsName(depts, el.departments);
         return (
           <NonConformCard
-            key={index}
+            key={el.id}
             occurenceDate={el["ocurrence-date"]}
             description={el.description}
-            departments={getDeptsName(depts, el.departments)}
+            departments={departmentsStr}
           >
-            <Button variant="primary">Ver mais</Button>
+            <Link
+              to={{
+                pathname: `/nao-conformidade/${el.id}`,
+                state: {
+                  nonConform: {
+                    id: el.id,
+                    date: el["ocurrence-date"],
+                    description: el.description,
+                    departments: departmentsStr,
+                    actions: el["corrective-actions"],
+                  },
+                },
+              }}
+            >
+              <Button variant="primary">Ver mais</Button>
+            </Link>
           </NonConformCard>
         );
       })}

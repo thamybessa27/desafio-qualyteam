@@ -13,7 +13,7 @@
   grid-area: conteudo;
   max-width: 80vw;
   margin: 10px auto;
-  min-height: calc(100vh - 96px);
+  min-height: calc(100vh - 116px);
 }
 .rodape {
   grid-area: rodape;
