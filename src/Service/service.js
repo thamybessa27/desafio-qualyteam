@@ -1,3 +1,9 @@
+//URLS
+export const naoConformsURL = "http://localhost:3000/non-conformities";
+
+export const departURLS = "http://localhost:3000/departments";
+
+export const correctActionsURL = "http://localhost:3000/corrective-actions";
 //Funcoes assíncronas para trabalhar com a API
 
 export async function getNaoConforms() {
@@ -8,4 +14,11 @@ export async function getNaoConforms() {
   const json = response.json();
   return json;
 }
-export const naoConformsURL = "http://localhost:3000/non-conformities";
+
+//funçoes
+
+export const getDeptsName = (deptsArray, nonConformArray) =>
+  deptsArray
+    .filter((item) => nonConformArray.includes(item.id))
+    .map((el) => el.name)
+    .join(", ");

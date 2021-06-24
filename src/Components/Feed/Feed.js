@@ -1,33 +1,39 @@
 import React from "react";
-import { naoConformsURL } from "../../Service/service";
+import {
+  departURLS,
+  getDeptsName,
+  naoConformsURL,
+} from "../../Service/service";
 import Spinner from "react-bootstrap/Spinner";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import useFetch from "use-http";
+import NonConformCard from "../NonConformBody/NonConformCard";
 
 const Feed = () => {
+  //fetching the non-conformities
   const { data = [], loading, error } = useFetch(naoConformsURL, []);
+  //fetching the departments
+  const {
+    data: depts = [],
+    loading: loadingDpt,
+    error: errDpt,
+  } = useFetch(departURLS, []);
 
   return (
     <main className="conteudo">
-      {loading && <Spinner animation="border" />}
-      {error && "Error!"}
+      {(loading || loadingDpt) && <Spinner animation="border" />}
+      {(error || errDpt) && "Error!"}
       {data.map((el, index) => {
         return (
-          <Card
+          <NonConformCard
             key={index}
-            border="light"
-            style={{ boxShadow: "7px 7px 5px #f4f4f4" }}
+            occurenceDate={el["ocurrence-date"]}
+            description={el.description}
+            departments={getDeptsName(depts, el.departments)}
           >
-            <Card.Body>
-              <Card.Title>
-                Data da ocorrência: {el["ocurrence-date"]}
-              </Card.Title>
-              <Card.Text>Descrição: {el.description}</Card.Text>
-              <Card.Text>Departamentos: {el.departments}</Card.Text>
-              <Button variant="primary">Ver mais</Button>
-            </Card.Body>
-          </Card>
+            <Button variant="primary">Ver mais</Button>
+          </NonConformCard>
         );
       })}
     </main>
