@@ -42,6 +42,7 @@ const Feed = () => {
                     date: el["ocurrence-date"],
                     description: el.description,
                     departments: departmentsStr,
+                    departmentsArr: el.departments,
                     actions: el["corrective-actions"],
                   },
                 },

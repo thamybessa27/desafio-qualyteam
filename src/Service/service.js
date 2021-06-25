@@ -28,6 +28,7 @@ export const getDeptsName = (deptsArray, nonConformArray) =>
 export const getCorrectActions = (actionsArray, nonConformArray) =>
   actionsArray.filter((item) => nonConformArray.includes(item.id));
 
+//atualiza a não-conformidade com a ação corretiva recem postada
 export const updateNonConformWithAction = (id, body) => {
   fetch(`http://localhost:3000/non-conformities/${id}`, {
     method: "PUT",
@@ -41,25 +42,28 @@ export const updateNonConformWithAction = (id, body) => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => console.log(data))
+    .catch((err) => new Error(`Erro: ${err}`));
 };
 
-export const addNewCorrectiveAction = (body) => {
-  fetch(correctActionsURL, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      "what-to-do": body.what,
-      "why-to-do-it": body.why,
-      "how-to-do-it": body.how,
-      "where-to-do-it": body.where,
-      "until-when": body.date,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      return data.id;
-    })
-    .catch((err) => new Error(`Erro HTTP! status: ${err}`));
+//adiciona nova ação corretiva no backend e retorna o id dessa açao adicionada
+export const addNewCorrectiveAction = async (body) => {
+  try {
+    const response = await fetch(correctActionsURL, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        "what-to-do": body.what,
+        "why-to-do-it": body.why,
+        "how-to-do-it": body.how,
+        "where-to-do-it": body.where,
+        "until-when": body.date,
+      }),
+    });
+    const data = await response.json();
+    console.log("nova açao postada: ", data);
+    return data.id;
+  } catch (err) {
+    return new Error(`Erro: ${err}`);
+  }
 };

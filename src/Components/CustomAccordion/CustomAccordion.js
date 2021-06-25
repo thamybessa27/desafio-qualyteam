@@ -1,9 +1,12 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
+import { getCorrectActions } from "../../Service/service";
 import style from "./CustomAccordion.module.css";
 
-const CustomAccordion = ({ actions }) => {
+const CustomAccordion = ({ allActions, nonConfomActions }) => {
+  const actions = getCorrectActions(allActions, nonConfomActions);
+
   return (
     <Accordion>
       <Card>

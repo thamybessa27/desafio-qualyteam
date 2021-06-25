@@ -14,7 +14,7 @@ const SingleNonConform = () => {
   //getting the props
   const location = useLocation();
   const { nonConform } = location.state;
-
+  console.log(nonConform);
   //fetching the corrective actions
   const {
     data: actions = [],
@@ -39,7 +39,10 @@ const SingleNonConform = () => {
           description={nonConform.description}
           departments={nonConform.departments}
         >
-          <CustomAccordion actions={actions} />
+          <CustomAccordion
+            allActions={actions}
+            nonConfomActions={nonConform.actions}
+          />
           <Button
             variant="primary"
             className={style.btnCustom}
