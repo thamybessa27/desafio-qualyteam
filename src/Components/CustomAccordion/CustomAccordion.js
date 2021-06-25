@@ -2,7 +2,6 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import style from "./CustomAccordion.module.css";
-//import Button from "react-bootstrap/Button";
 
 const CustomAccordion = ({ actions }) => {
   return (
@@ -11,7 +10,6 @@ const CustomAccordion = ({ actions }) => {
         {actions.map((el, index) => {
           return (
             <React.Fragment key={index}>
-              {/* <Card.Header> */}
               <Accordion.Toggle
                 eventKey={el.id}
                 as={Card.Header}
@@ -20,7 +18,6 @@ const CustomAccordion = ({ actions }) => {
               >
                 <Card.Text>Ação corretiva: {el.id}</Card.Text>
               </Accordion.Toggle>
-              {/* </Card.Header> */}
               <Accordion.Collapse eventKey={el.id}>
                 <Card.Body>
                   <ul className={style.list}>
