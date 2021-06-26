@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 
 //PRECISO: depois que add a nova ação, tem que adicionar essa ação na não-conformidade ... pra isso preciso do array com departamentos e também array com as ações anteriores (talvez mexer na função que trabalha isso)
 
-const FormCorrectAction = ({ originalData }) => {
+const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
   const { id } = useParams();
   const [reqResponse, setReqResponse] = React.useState("");
 
@@ -49,15 +49,16 @@ const FormCorrectAction = ({ originalData }) => {
         date: formDate.value,
       };
       addNewCorrectiveAction(bodyReq)
-        .then((DataId) =>
+        .then((DataId) => {
           updateNonConformWithAction(id, {
             id: id,
             description: originalData.description,
             date: originalData.date,
             departments: originalData.departmentsArr,
             actions: [...originalData.actions, DataId],
-          })
-        )
+          });
+          setAddedAction([...addedAction, DataId]);
+        })
         .then(() => {
           setLoading(false);
           //se a req for 200:

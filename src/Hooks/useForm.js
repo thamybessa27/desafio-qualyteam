@@ -3,8 +3,9 @@ import React from "react";
 //hook customizado que faz a validação dos campos do formulário
 
 const types = {
+  //nesse caso tá valendo tudo
   text: {
-    regex: /^[a-zA-Z ]+$/,
+    regex: /[\s\S]+/,
     errorMsg: "Entrada inválida",
   },
 };

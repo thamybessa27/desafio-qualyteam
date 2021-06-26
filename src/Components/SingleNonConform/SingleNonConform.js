@@ -14,7 +14,10 @@ const SingleNonConform = () => {
   //getting the props
   const location = useLocation();
   const { nonConform } = location.state;
-  console.log(nonConform);
+  console.log("vindo do feed:", nonConform);
+
+  const [addedAction, setAddedAction] = React.useState([...nonConform.actions]);
+  console.log("via props", nonConform.actions, "estado:", addedAction);
   //fetching the corrective actions
   const {
     data: actions = [],
@@ -22,6 +25,7 @@ const SingleNonConform = () => {
     error: errActions,
   } = useFetch(correctActionsURL, []);
 
+  console.log("pos action fetch", actions);
   const [visible, setVisible] = React.useState(false);
 
   const showAddNewAction = () => {
@@ -41,7 +45,7 @@ const SingleNonConform = () => {
         >
           <CustomAccordion
             allActions={actions}
-            nonConfomActions={nonConform.actions}
+            nonConfomActions={addedAction}
           />
           <Button
             variant="primary"
@@ -51,7 +55,13 @@ const SingleNonConform = () => {
             Adicionar ação corretiva
           </Button>{" "}
         </NonConformCard>
-        {visible && <FormCorrectAction originalData={nonConform} />}
+        {visible && (
+          <FormCorrectAction
+            originalData={nonConform}
+            setAddedAction={setAddedAction}
+            addedAction={addedAction}
+          />
+        )}
       </CardDeck>
     </section>
   );
