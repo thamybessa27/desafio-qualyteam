@@ -14,10 +14,10 @@ const SingleNonConform = () => {
   //getting the props
   const location = useLocation();
   const { nonConform } = location.state;
-  console.log("vindo do feed:", nonConform);
+  // console.log("vindo do feed:", nonConform);
 
   const [addedAction, setAddedAction] = React.useState([...nonConform.actions]);
-  console.log("via props", nonConform.actions, "estado:", addedAction);
+  // console.log("via props", nonConform.actions, "estado:", addedAction);
   //fetching the corrective actions
   const {
     data: actions = [],
@@ -25,7 +25,7 @@ const SingleNonConform = () => {
     error: errActions,
   } = useFetch(correctActionsURL, []);
 
-  console.log("pos action fetch", actions);
+  // console.log("pos action fetch", actions);
   const [visible, setVisible] = React.useState(false);
 
   const showAddNewAction = () => {
@@ -35,34 +35,36 @@ const SingleNonConform = () => {
   return (
     <section className="conteudo">
       {loadingAction && <Spinner animation="border" />}
-      {errActions && "Error!"}
-      <CardDeck>
-        <NonConformCard
-          key={nonConform.id}
-          occurenceDate={nonConform.date}
-          description={nonConform.description}
-          departments={nonConform.departments}
-        >
-          <CustomAccordion
-            allActions={actions}
-            nonConfomActions={addedAction}
-          />
-          <Button
-            variant="primary"
-            className={style.btnCustom}
-            onClick={showAddNewAction}
+      {errActions && <span>Erro: {errActions}</span>}
+      {!errActions && !loadingAction && (
+        <CardDeck>
+          <NonConformCard
+            key={nonConform.id}
+            occurenceDate={nonConform.date}
+            description={nonConform.description}
+            departments={nonConform.departments}
           >
-            Adicionar ação corretiva
-          </Button>{" "}
-        </NonConformCard>
-        {visible && (
-          <FormCorrectAction
-            originalData={nonConform}
-            setAddedAction={setAddedAction}
-            addedAction={addedAction}
-          />
-        )}
-      </CardDeck>
+            <CustomAccordion
+              allActions={actions}
+              nonConfomActions={addedAction}
+            />
+            <Button
+              variant="primary"
+              className={style.btnCustom}
+              onClick={showAddNewAction}
+            >
+              Adicionar ação corretiva
+            </Button>{" "}
+          </NonConformCard>
+          {visible && (
+            <FormCorrectAction
+              originalData={nonConform}
+              setAddedAction={setAddedAction}
+              addedAction={addedAction}
+            />
+          )}
+        </CardDeck>
+      )}
     </section>
   );
 };
