@@ -6,6 +6,7 @@ import Rodape from "./Components/Rodape/Rodape";
 import Feed from "./Components/Feed/Feed";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import SingleNonConform from "./Components/SingleNonConform/SingleNonConform";
+import AddNonConform from "./Components/AddNonConform/AddNonConform";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route path="/nao-conformidade/:id">
             <SingleNonConform />
+          </Route>
+          <Route path="/nova-nao-conformidade">
+            <AddNonConform />
           </Route>
         </Switch>
         <Rodape />

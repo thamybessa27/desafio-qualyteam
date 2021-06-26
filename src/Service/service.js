@@ -67,3 +67,23 @@ export const addNewCorrectiveAction = async (body) => {
     return new Error(`Erro: ${err}`);
   }
 };
+
+//adiciona nova não-conformidade no backend
+export const addNewNonConformity = async (body) => {
+  try {
+    const response = await fetch(naoConformsURL, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        description: body.description,
+        "ocurrence-date": body.date,
+        departments: body.departments,
+        "corrective-actions": body.actions,
+      }),
+    });
+    const data = await response.json();
+    console.log("nova nao conform:", data);
+  } catch (err) {
+    return new Error(`Erro: ${err}`);
+  }
+};

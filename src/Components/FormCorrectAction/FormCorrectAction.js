@@ -73,6 +73,7 @@ const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
           }, 4000);
         })
         .catch((err) => {
+          setLoading(false);
           setReqResponse(`Erro: ${err}`);
           setTimeout(() => {
             setReqResponse("");

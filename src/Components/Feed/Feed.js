@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./Feed.module.css";
 import {
   departURLS,
   getDeptsName,
@@ -21,7 +22,7 @@ const Feed = () => {
   } = useFetch(departURLS, []);
 
   return (
-    <main className="conteudo">
+    <main className={style.feed + ` conteudo`}>
       {(loading || loadingDpt) && <Spinner animation="border" />}
       {(error || errDpt) && "Error!"}
       {data.map((el) => {
