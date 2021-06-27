@@ -14,10 +14,9 @@ const SingleNonConform = () => {
   //getting the props
   const location = useLocation();
   const { nonConform } = location.state;
-  // console.log("vindo do feed:", nonConform);
 
   const [addedAction, setAddedAction] = React.useState([...nonConform.actions]);
-  // console.log("via props", nonConform.actions, "estado:", addedAction);
+
   //fetching the corrective actions
   const {
     data: actions = [],
@@ -25,7 +24,6 @@ const SingleNonConform = () => {
     error: errActions,
   } = useFetch(correctActionsURL, []);
 
-  // console.log("pos action fetch", actions);
   const [visible, setVisible] = React.useState(false);
 
   const showAddNewAction = () => {
@@ -44,10 +42,13 @@ const SingleNonConform = () => {
             description={nonConform.description}
             departments={nonConform.departments}
           >
-            <CustomAccordion
-              allActions={actions}
-              nonConfomActions={addedAction}
-            />
+            <p>Ações corretivas: {addedAction.length} </p>
+            {addedAction.length > 0 && (
+              <CustomAccordion
+                allActions={actions}
+                nonConfomActions={addedAction}
+              />
+            )}
             <Button
               variant="primary"
               className={style.btnCustom}

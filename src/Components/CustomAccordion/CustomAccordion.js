@@ -27,13 +27,6 @@ const CustomAccordion = ({ allActions, nonConfomActions }) => {
       if (response.ok) {
         console.log("res:", response.data);
         const fetchedActions = getCorrectActions(result, nonConfomActions);
-        // console.log(
-        //   "no accordion effect",
-        //   nonConfomActions,
-        //   fetchedActions,
-        //   "data",
-        //   result
-        // );
         return setActions([...fetchedActions]);
       }
     })();
@@ -45,7 +38,6 @@ const CustomAccordion = ({ allActions, nonConfomActions }) => {
       {errActions && <span>Erro: {errActions}</span>}
       {!errActions && !loadingAction && (
         <Card>
-          {/* {console.log("action no map", actions)} */}
           {actions.map((el, index) => {
             return (
               <React.Fragment key={index}>
@@ -59,7 +51,7 @@ const CustomAccordion = ({ allActions, nonConfomActions }) => {
                     cursor: "pointer",
                   }}
                 >
-                  <Card.Text>Ação corretiva: {el.id}</Card.Text>
+                  <Card.Text>Ação corretiva: #{index + 1}</Card.Text>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={el.id}>
                   <Card.Body>

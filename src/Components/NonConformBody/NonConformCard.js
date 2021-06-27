@@ -13,10 +13,6 @@ const NonConformCard = ({
   );
   return (
     <Card border="light" style={{ boxShadow: "7px 7px 5px #f4f4f4" }}>
-      {console.log(
-        "data arrumada: ",
-        moment(occurenceDate, "DD-MM-YYYY").format("MMMM Do YYYY")
-      )}
       <Card.Body>
         <Card.Title>Data da ocorrência: {formattedDate.toString()}</Card.Title>
         <Card.Text>Descrição: {description}</Card.Text>
