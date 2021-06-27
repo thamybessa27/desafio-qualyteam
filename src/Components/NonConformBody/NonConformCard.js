@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import moment from "moment";
 
 const NonConformCard = ({
   occurenceDate,
@@ -7,14 +8,17 @@ const NonConformCard = ({
   departments,
   children,
 }) => {
+  const formattedDate = moment(occurenceDate, "DD-MM-YYYY").format(
+    "MMMM Do YYYY"
+  );
   return (
-    <Card
-      // key={index}
-      border="light"
-      style={{ boxShadow: "7px 7px 5px #f4f4f4" }}
-    >
+    <Card border="light" style={{ boxShadow: "7px 7px 5px #f4f4f4" }}>
+      {console.log(
+        "data arrumada: ",
+        moment(occurenceDate, "DD-MM-YYYY").format("MMMM Do YYYY")
+      )}
       <Card.Body>
-        <Card.Title>Data da ocorrência: {occurenceDate}</Card.Title>
+        <Card.Title>Data da ocorrência: {formattedDate.toString()}</Card.Title>
         <Card.Text>Descrição: {description}</Card.Text>
         <Card.Text>Departamentos: {departments}</Card.Text>
         {children}

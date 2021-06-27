@@ -6,7 +6,7 @@ import useFetch from "use-http";
 import NonConformCard from "../NonConformBody/NonConformCard";
 import { Link } from "react-router-dom";
 import { departURLS, naoConformsURL } from "../../Service/urls";
-import { getDeptsName } from "../../Service/helperFunctions";
+import { getDeptsName, sortByDate } from "../../Service/helperFunctions";
 
 const Feed = () => {
   //fetching the non-conformities
@@ -17,6 +17,11 @@ const Feed = () => {
     loading: loadingDpt,
     error: errDpt,
   } = useFetch(departURLS, []);
+
+  React.useEffect(() => {
+    sortByDate(data);
+  }, [data]);
+
   return (
     <main className={style.feed + ` conteudo`}>
       {(loading || loadingDpt) && <Spinner animation="border" />}
