@@ -87,11 +87,6 @@ const AddNonConform = () => {
         {!errorDept && !loadingDept && (
           <Card.Body>
             <Form>
-              <Form.Group controlId="descricao">
-                <Form.Label>Descrição: </Form.Label>
-                <Form.Control type="text" {...formDescript} />
-                {formDescript.erro && <span>{formDescript.erro}</span>}
-              </Form.Group>
               <Form.Group controlId="data">
                 <Form.Label>Data da ocorrência: </Form.Label>
                 <div className="datepicker">
@@ -104,17 +99,32 @@ const AddNonConform = () => {
                 </div>
                 {formDate.erro && <span>{formDate.erro}</span>}
               </Form.Group>
-              {dataDept.map((el) => {
-                return (
-                  <Form.Check
-                    type="checkbox"
-                    id={el.id}
-                    label={el.name}
-                    onChange={handleCheckChange}
-                    checked={formDepartArr.includes(el.id) ? true : false}
-                  />
-                );
-              })}
+              <Form.Group controlId="descricao">
+                <Form.Label>Descrição: </Form.Label>
+                <Form.Control
+                  onChange={formDescript.onChange}
+                  onBlur={formDescript.onBlur}
+                  value={formDescript.value}
+                  as="textarea"
+                  rows={3}
+                />
+                {formDescript.erro && <span>{formDescript.erro}</span>}
+              </Form.Group>
+              <Form.Group controlId="departamentos">
+                <Form.Label>Departamentos: </Form.Label>
+                {dataDept.map((el, idx) => {
+                  return (
+                    <Form.Check
+                      key={idx}
+                      type="checkbox"
+                      id={el.id}
+                      label={el.name}
+                      onChange={handleCheckChange}
+                      checked={formDepartArr.includes(el.id) ? true : false}
+                    />
+                  );
+                })}
+              </Form.Group>
               <Button
                 onClick={sendNewNonConform}
                 className={style.btnCustom}

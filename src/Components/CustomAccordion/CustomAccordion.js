@@ -57,12 +57,12 @@ const CustomAccordion = ({ allActions, nonConfomActions }) => {
                 <Accordion.Collapse eventKey={el.id}>
                   <Card.Body>
                     <ul className={style.list}>
-                      <li>What to do: {el["what-to-do"]}</li>
-                      <li>Why to do it: {el["why-to-do-it"]}</li>
-                      <li>How to do it: {el["how-to-do-it"]}</li>
-                      <li>Where to do it: {el["where-to-do-it"]}</li>
+                      <li>O que fazer: {el["what-to-do"]}</li>
+                      <li>Porque fazer: {el["why-to-do-it"]}</li>
+                      <li>Como fazer: {el["how-to-do-it"]}</li>
+                      <li>Onde fazer: {el["where-to-do-it"]}</li>
                       <li>
-                        Until when:{" "}
+                        Até quando:{" "}
                         {moment(el["until-when"], "DD-MM-YYYY").format(
                           "MMMM Do YYYY"
                         )}

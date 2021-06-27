@@ -14,8 +14,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
-//PRECISO: depois que add a nova ação, tem que adicionar essa ação na não-conformidade ... pra isso preciso do array com departamentos e também array com as ações anteriores (talvez mexer na função que trabalha isso)
-
 const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
   const { id } = useParams();
   const [reqResponse, setReqResponse] = React.useState("");
@@ -25,15 +23,13 @@ const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
   const formHow = useForm("text");
   const formWhere = useForm("text");
   const formDate = useForm("text");
-  console.log(moment(formDate.value).format("DD-MM-YYYY"));
   const [loading, setLoading] = React.useState(false);
 
   const formObjArr = [
-    { label: "What to do", controller: formWhat },
-    { label: "Why to do it", controller: formWhy },
-    { label: "How to do it", controller: formHow },
-    { label: "Where to do it", controller: formWhere },
-    // { label: "Until when", controller: formDate },
+    { label: "O que fazer", controller: formWhat },
+    { label: "Porque fazer", controller: formWhy },
+    { label: "Como fazer", controller: formHow },
+    { label: "Onde fazer", controller: formWhere },
   ];
 
   const sendAddCorrectiveAction = async () => {
@@ -96,13 +92,18 @@ const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
               return (
                 <Form.Group controlId={Object.keys(el.label)[0]} key={idx}>
                   <Form.Label>{el.label}: </Form.Label>
-                  <Form.Control type="text" {...el.controller} />
+                  <Form.Control
+                    onChange={el.controller.onChange}
+                    value={el.controller.value}
+                    onBlur={el.controller.onBlur}
+                    type="text"
+                  />
                   {el.controller.erro && <span>{el.controller.erro}</span>}
                 </Form.Group>
               );
             })}
             <Form.Group controlId="occurence-date">
-              <Form.Label>Untill when: </Form.Label>
+              <Form.Label>Até quando: </Form.Label>
               <div className="datepicker">
                 <DatePicker
                   selected={formDate.value}

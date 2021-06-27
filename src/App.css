@@ -26,19 +26,16 @@
   width: 100%;
 }
 
-.react-datepicker__day--selected,
-.react-datepicker__day--in-selecting-range,
-.react-datepicker__day--in-range,
-.react-datepicker__month-text--selected,
-.react-datepicker__month-text--in-selecting-range,
-.react-datepicker__month-text--in-range,
-.react-datepicker__quarter-text--selected,
-.react-datepicker__quarter-text--in-selecting-range,
-.react-datepicker__quarter-text--in-range,
-.react-datepicker__year-text--selected,
-.react-datepicker__year-text--in-selecting-range,
-.react-datepicker__year-text--in-range {
+.react-datepicker__day--selected {
   border-radius: 0.3rem;
   background-color: #c91331 !important;
   color: #fff;
+}
+input[type="text"] {
+  border: 1px solid #ced4da !important;
+  border-radius: 0.25rem !important;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+  line-height: 1.5 !important;
+  font-size: 1rem !important;
+  height: calc(1.5em + 0.75rem + 2px) !important;
 }

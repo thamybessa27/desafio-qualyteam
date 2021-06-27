@@ -1,5 +1,4 @@
 //URLS
-
 export const naoConformsURL = "http://localhost:3000/non-conformities";
 
 export const departURLS = "http://localhost:3000/departments";
