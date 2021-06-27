@@ -6,6 +6,7 @@ import useFetch from "use-http";
 import { getCorrectActions } from "../../Service/helperFunctions";
 import { correctActionsURL } from "../../Service/urls";
 import style from "./CustomAccordion.module.css";
+import moment from "moment";
 
 const CustomAccordion = ({ allActions, nonConfomActions }) => {
   const [actions, setActions] = React.useState(() => {
@@ -60,7 +61,12 @@ const CustomAccordion = ({ allActions, nonConfomActions }) => {
                       <li>Why to do it: {el["why-to-do-it"]}</li>
                       <li>How to do it: {el["how-to-do-it"]}</li>
                       <li>Where to do it: {el["where-to-do-it"]}</li>
-                      <li>Until when: {el["until-when"]}</li>
+                      <li>
+                        Until when:{" "}
+                        {moment(el["until-when"], "DD-MM-YYYY").format(
+                          "MMMM Do YYYY"
+                        )}
+                      </li>
                     </ul>
                   </Card.Body>
                 </Accordion.Collapse>

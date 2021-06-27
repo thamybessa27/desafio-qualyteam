@@ -7,6 +7,7 @@
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start)
 - [use-htpp](https://www.npmjs.com/package/use-http)
 - [moment.js](https://momentjs.com)
+- [react-datepicker](https://www.npmjs.com/package/react-datepicker)
 - API consumida: [Qualyteam/front-end-challenge](https://github.com/Qualyteam/front-end-challenge)
 
 ## Páginas:
@@ -29,5 +30,3 @@
 ### Uso:
 
 - neste projeto, o backend está configurado para a porta 3000, mas se desejar usar outra, atualize as URLs na pasta `/src/service/urls.js`
-
-- na página de cadastro de nova não conformidade o formato da data deve ser "DD-MM-AAAA" ou "DD/MM/AAAA". Se não for ddessa maneira, haverá problema para renderizar as não conformidades cadastradas.

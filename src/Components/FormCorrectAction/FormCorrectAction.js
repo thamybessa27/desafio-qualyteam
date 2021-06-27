@@ -10,6 +10,9 @@ import {
 } from "../../Service/service";
 import useForm from "../../Hooks/useForm";
 import { useParams } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 //PRECISO: depois que add a nova ação, tem que adicionar essa ação na não-conformidade ... pra isso preciso do array com departamentos e também array com as ações anteriores (talvez mexer na função que trabalha isso)
 
@@ -22,6 +25,7 @@ const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
   const formHow = useForm("text");
   const formWhere = useForm("text");
   const formDate = useForm("text");
+  console.log(moment(formDate.value).format("DD-MM-YYYY"));
   const [loading, setLoading] = React.useState(false);
 
   const formObjArr = [
@@ -29,7 +33,7 @@ const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
     { label: "Why to do it", controller: formWhy },
     { label: "How to do it", controller: formHow },
     { label: "Where to do it", controller: formWhere },
-    { label: "Until when", controller: formDate },
+    // { label: "Until when", controller: formDate },
   ];
 
   const sendAddCorrectiveAction = async () => {
@@ -46,7 +50,7 @@ const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
         why: formWhy.value,
         how: formHow.value,
         where: formWhere.value,
-        date: formDate.value,
+        date: moment(formDate.value).format("DD-MM-YYYY"),
       };
       addNewCorrectiveAction(bodyReq)
         .then((DataId) => {
@@ -97,6 +101,18 @@ const FormCorrectAction = ({ originalData, setAddedAction, addedAction }) => {
                 </Form.Group>
               );
             })}
+            <Form.Group controlId="occurence-date">
+              <Form.Label>Untill when: </Form.Label>
+              <div className="datepicker">
+                <DatePicker
+                  selected={formDate.value}
+                  minDate={new Date()}
+                  showDisabledMonthNavigation
+                  onChange={(date) => formDate.setValue(date)}
+                />
+              </div>
+              {formDate.erro && <span>{formDate.erro}</span>}
+            </Form.Group>
             <Button variant="primary" onClick={sendAddCorrectiveAction}>
               Salvar
             </Button>
