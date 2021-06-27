@@ -8,6 +8,9 @@ import { addNewNonConformity } from "../../Service/service";
 import { departURLS } from "../../Service/urls";
 import style from "./AddNonConform.module.css";
 import useForm from "../../Hooks/useForm";
+import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddNonConform = () => {
   //fetching the departments
@@ -45,13 +48,13 @@ const AddNonConform = () => {
       setLoading(true);
       const bodyReq = {
         description: formDescript.value,
-        date: formDate.value,
+        date: moment(formDate.value).format("DD-MM-YYYY"),
         departments: [...formDepartArr],
         actions: [],
       };
       addNewNonConformity(bodyReq)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          // console.log(response);
           setLoading(false);
           formDate.setValue("");
           formDescript.setValue("");
@@ -90,8 +93,15 @@ const AddNonConform = () => {
                 {formDescript.erro && <span>{formDescript.erro}</span>}
               </Form.Group>
               <Form.Group controlId="data">
-                <Form.Label>Data: </Form.Label>
-                <Form.Control type="text" {...formDate} />
+                <Form.Label>Data da ocorrência: </Form.Label>
+                <div className="datepicker">
+                  <DatePicker
+                    selected={formDate.value}
+                    maxDate={new Date()}
+                    showDisabledMonthNavigation
+                    onChange={(date) => formDate.setValue(date)}
+                  />
+                </div>
                 {formDate.erro && <span>{formDate.erro}</span>}
               </Form.Group>
               {dataDept.map((el) => {
