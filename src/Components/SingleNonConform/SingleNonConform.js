@@ -1,7 +1,6 @@
 import React from "react";
 import Spinner from "react-bootstrap/Spinner";
 import useFetch from "use-http";
-import { correctActionsURL } from "../../Service/service";
 import { useLocation } from "react-router-dom";
 import NonConformCard from "../NonConformBody/NonConformCard";
 import CustomAccordion from "../CustomAccordion/CustomAccordion";
@@ -9,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import CardDeck from "react-bootstrap/CardDeck";
 import style from "./SingleNonConform.module.css";
 import FormCorrectAction from "../FormCorrectAction/FormCorrectAction";
+import { correctActionsURL } from "../../Service/urls";
 
 const SingleNonConform = () => {
   //getting the props
@@ -37,7 +37,7 @@ const SingleNonConform = () => {
       {loadingAction && <Spinner animation="border" />}
       {errActions && <span>Erro: {errActions}</span>}
       {!errActions && !loadingAction && (
-        <CardDeck>
+        <CardDeck style={{ width: "80vw" }}>
           <NonConformCard
             key={nonConform.id}
             occurenceDate={nonConform.date}

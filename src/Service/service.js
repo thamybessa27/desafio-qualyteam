@@ -1,13 +1,8 @@
-//URLS
-export const naoConformsURL = "http://localhost:3000/non-conformities";
-
-export const departURLS = "http://localhost:3000/departments";
-
-export const correctActionsURL = "http://localhost:3000/corrective-actions";
-
-//export const updateNonComformAction = ;
 //Funcoes assíncronas para trabalhar com a API
 
+import { correctActionsURL, naoConformsURL } from "./urls";
+
+const headers = { "content-type": "application/json" };
 export async function getNaoConforms() {
   const response = await fetch(naoConformsURL);
   if (!response.ok) {
@@ -17,22 +12,11 @@ export async function getNaoConforms() {
   return json;
 }
 
-//funçoes
-
-export const getDeptsName = (deptsArray, nonConformArray) =>
-  deptsArray
-    .filter((item) => nonConformArray.includes(item.id))
-    .map((el) => el.name)
-    .join(", ");
-
-export const getCorrectActions = (actionsArray, nonConformArray) =>
-  actionsArray.filter((item) => nonConformArray.includes(item.id));
-
 //atualiza a não-conformidade com a ação corretiva recem postada
 export const updateNonConformWithAction = (id, body) => {
-  fetch(`http://localhost:3000/non-conformities/${id}`, {
+  fetch(`${naoConformsURL}/${id}`, {
     method: "PUT",
-    headers: { "content-type": "application/json" },
+    headers: headers,
     body: JSON.stringify({
       id: body.id,
       description: body.description,
@@ -51,7 +35,7 @@ export const addNewCorrectiveAction = async (body) => {
   try {
     const response = await fetch(correctActionsURL, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: headers,
       body: JSON.stringify({
         "what-to-do": body.what,
         "why-to-do-it": body.why,
@@ -73,7 +57,7 @@ export const addNewNonConformity = async (body) => {
   try {
     const response = await fetch(naoConformsURL, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: headers,
       body: JSON.stringify({
         description: body.description,
         "ocurrence-date": body.date,

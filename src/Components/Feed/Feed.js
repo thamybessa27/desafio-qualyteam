@@ -1,15 +1,12 @@
 import React from "react";
 import style from "./Feed.module.css";
-import {
-  departURLS,
-  getDeptsName,
-  naoConformsURL,
-} from "../../Service/service";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 import useFetch from "use-http";
 import NonConformCard from "../NonConformBody/NonConformCard";
 import { Link } from "react-router-dom";
+import { departURLS, naoConformsURL } from "../../Service/urls";
+import { getDeptsName } from "../../Service/helperFunctions";
 
 const Feed = () => {
   //fetching the non-conformities
@@ -20,7 +17,6 @@ const Feed = () => {
     loading: loadingDpt,
     error: errDpt,
   } = useFetch(departURLS, []);
-
   return (
     <main className={style.feed + ` conteudo`}>
       {(loading || loadingDpt) && <Spinner animation="border" />}

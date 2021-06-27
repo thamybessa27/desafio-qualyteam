@@ -2,8 +2,9 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
-import { getCorrectActions, correctActionsURL } from "../../Service/service";
 import useFetch from "use-http";
+import { getCorrectActions } from "../../Service/helperFunctions";
+import { correctActionsURL } from "../../Service/urls";
 import style from "./CustomAccordion.module.css";
 
 const CustomAccordion = ({ allActions, nonConfomActions }) => {

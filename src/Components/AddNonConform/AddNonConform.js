@@ -4,7 +4,8 @@ import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import useFetch from "use-http";
-import { addNewNonConformity, departURLS } from "../../Service/service";
+import { addNewNonConformity } from "../../Service/service";
+import { departURLS } from "../../Service/urls";
 import style from "./AddNonConform.module.css";
 import useForm from "../../Hooks/useForm";
 
