@@ -30,3 +30,7 @@
 ### Uso:
 
 - neste projeto, o backend está configurado para a porta 3000, mas se desejar usar outra, atualize as URLs na pasta `/src/service/urls.js`
+
+### Testes:
+
+- Para rodar os testes existentes, execute no terminal na pasta do projeto o comando `npm run test` e os testes serão exibidos no terminal
