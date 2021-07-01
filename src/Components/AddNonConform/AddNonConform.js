@@ -23,19 +23,22 @@ const AddNonConform = () => {
   //controlando o formulário
   const formDescript = useForm("text");
   const formDate = useForm("text");
-  const [formDepartArr, setFormDepartArr] = React.useState([]);
+  const formDept = useForm("checkbox");
+
+  //const [formDepartArr, setFormDepartArr] = React.useState([]);
+  //const [erroDept, setErroDept] = React.useState("");
 
   const [loading, setLoading] = React.useState(false);
   const [reqResponse, setReqResponse] = React.useState("");
 
   const handleCheckChange = ({ target }) => {
     const id = parseInt(target.id);
-    console.log("id", id);
-    if (formDepartArr.includes(id)) {
-      const index = formDepartArr.indexOf(id);
-      formDepartArr.splice(index, 1);
+    if (formDept.value.includes(id)) {
+      const index = formDept.value.indexOf(id);
+      const newValue = formDept.value.filter((idx) => idx !== index);
+      formDept.setValue([...newValue]);
     } else {
-      setFormDepartArr([...formDepartArr, id]);
+      formDept.setValue([...formDept.value, id]);
     }
   };
 
@@ -43,13 +46,14 @@ const AddNonConform = () => {
     if (
       formDate.validateInput() &&
       formDescript.validateInput() &&
-      formDepartArr.length > 0
+      formDept.validateInput()
     ) {
+      //setErroDept("");
       setLoading(true);
       const bodyReq = {
         description: formDescript.value,
         date: moment(formDate.value).format("DD-MM-YYYY"),
-        departments: [...formDepartArr],
+        departments: [...formDept.value],
         actions: [],
       };
       addNewNonConformity(bodyReq)
@@ -58,7 +62,7 @@ const AddNonConform = () => {
           setLoading(false);
           formDate.setValue("");
           formDescript.setValue("");
-          setFormDepartArr([]);
+          formDept.setValue([]);
           setReqResponse("Sucesso! Não conformidade cadastrada.");
           setTimeout(() => {
             setReqResponse("");
@@ -72,6 +76,9 @@ const AddNonConform = () => {
           }, 4000);
         });
     }
+    // else if (formDepartArr.length === 0) {
+    //   setErroDept("Selecione pelo menos um departamento");
+    // }
   };
   return (
     <section className="conteudo">
@@ -120,10 +127,11 @@ const AddNonConform = () => {
                       id={el.id}
                       label={el.name}
                       onChange={handleCheckChange}
-                      checked={formDepartArr.includes(el.id) ? true : false}
+                      checked={formDept.value.includes(el.id) ? true : false}
                     />
                   );
                 })}
+                {formDept.erro && <span>{formDept.erro}</span>}
               </Form.Group>
               <Button
                 onClick={sendNewNonConform}

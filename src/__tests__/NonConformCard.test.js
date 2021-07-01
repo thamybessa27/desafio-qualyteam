@@ -17,7 +17,7 @@ afterEach(() => {
   container = null;
 });
 
-it("renderiza as props", function () {
+it("renderiza as props corretamente", function () {
   act(() => {
     render(
       <NonConformCard
